@@ -18,7 +18,7 @@ def printcol(s, c):
     print(c + s + colors.ENDC)
 
 
-def smart_file_duplication(f):
+def file_duplication(f):
     if os.path.isfile(f):
         shutil.copy(f, f + '.dupl')
         if os.path.exists: # checking if duplication was successful
@@ -67,12 +67,12 @@ while True:
             print("duplicating....")
             file_list = os.listdir(".")
             for f in file_list:
-                smart_file_duplication(f)
+                file_duplication(f)
 
         elif do == 5: # Duplicate specified file
             print("duplicating....")
             f = raw_input(colors.GREEN + "enter file name: " + colors.ENDC)
-            smart_file_duplication(f)
+            file_duplication(f)
 
         elif do == 6: # Remove duplicates
             print("removing duplicates....")
