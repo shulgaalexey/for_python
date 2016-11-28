@@ -35,51 +35,29 @@ while True:
             print(psutil.pids())
 
         elif do == 4: #Duplicate file list
-            file_list = os.listdir(".")
-            print("files in dir:", file_list)
             print("duplicating....")
-            i = 0
-            while i < len(file_list):
-                if not os.path.isfile(file_list[i]):
-                    i += 1
-                    continue
-                print("copying...: ", file_list[i])
-                shutil.copy(file_list[i], file_list[i] + '.dupl')
-                i += 1
             file_list = os.listdir(".")
-            print("files in dir:", file_list)
+            for f in file_list:
+                if os.path.isfile(f):
+                    print("copying...: ", f)
+                    shutil.copy(f, f + '.dupl')
 
         elif do == 5: # Duplicate specified file
-            file_list = os.listdir(".")
-            print("files in dir:", file_list)
-            file_to_dup = raw_input("enter file name: ")
             print("duplicating....")
-            i = 0
-            while i < len(file_list):
-                if not os.path.isfile(file_list[i]):
-                    i += 1
-                    continue
-                if file_list[i] == file_to_dup:
-                    shutil.copy(file_list[i], file_list[i] + '.dupl')
-                i += 1
+            file_to_dup = raw_input("enter file name: ")
             file_list = os.listdir(".")
-            print("files in dir:", file_list)
+            for f in file_list:
+                if f == file_to_dup and os.path.isfile(f):
+                    shutil.copy(f, f + '.dupl')
+                    break
 
         elif do == 6: # Remove duplicates
-            file_list = os.listdir(".")
-            print("files in dir:", file_list)
             print("removing duplicates....")
-            i = 0
-            while i < len(file_list):
-                file_name = file_list[i]
-                extension = os.path.splitext(file_name)[1]
-                #if file_name.endswith('.dupl'): # option 2
-                if extension == '.dupl':
-                    print("to be removed: ", file_name)
-                    os.remove(file_name)
-                i += 1
             file_list = os.listdir(".")
-            print("files in dir:", file_list)
+            for f in file_list:
+                if os.path.isfile(f) and f.endswith('.dupl'):
+                    print("to be removed: ", f)
+                    os.remove(f)
 
         else:
             print("unknown operation")
