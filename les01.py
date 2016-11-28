@@ -31,6 +31,19 @@ def file_duplication(f):
         printcol("ignoring directory: " + f, colors.WARNING)
         return False
 
+
+def delete_duplicates():
+    file_list = os.listdir(".")
+    cnt = 0
+    for f in file_list:
+        if os.path.isfile(f) and f.endswith('.dupl'):
+            print("to be removed: " + f)
+            os.remove(f)
+            if not os.path.exists(f):
+                cnt += 1
+    return cnt
+
+
 def system_info():
     printcol("SYSTEM INFO", colors.BLUE)
     printcol("platform: " + sys.platform, colors.BLUE)
@@ -79,11 +92,8 @@ while True:
 
         elif do == 6: # Remove duplicates
             print("removing duplicates....")
-            file_list = os.listdir(".")
-            for f in file_list:
-                if os.path.isfile(f) and f.endswith('.dupl'):
-                    print("to be removed: ", f)
-                    os.remove(f)
+            cnt = delete_duplicates()
+            printcol("total: " + str(cnt), colors.WARNING)
 
         else:
             print("unknown operation")
