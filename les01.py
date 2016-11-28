@@ -3,6 +3,20 @@ import psutil
 import shutil
 import sys
 
+class colors:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+def printcol(s, c):
+    print(c + s + colors.ENDC)
+
 
 def smart_file_duplication(f):
     if os.path.isfile(f):
@@ -11,38 +25,39 @@ def smart_file_duplication(f):
             print("duplicated: " + f)
             return True
         else:
-            print("ERROR while duplicating file: " + f)
+            printcol("ERROR while duplicating file: " + f, colors.FAIL)
             return False
     else:
-        print("ignoring directory: " + f)
+        printcol("ignoring directory: " + f, colors.WARNING)
         return False
 
-print("hello", bcolors.HEADER)
+
+printcol("\nHello\n", colors.HEADER)
 
 is_continue = "y"
 while True:
     if is_continue == "y":
 
-        print("I can do following: ")
-        print(" [1] - Print file list")
-        print(" [2] - Print system info")
-        print(" [3] - Print process list")
-        print(" [4] - Duplicate files in cur dir")
-        print(" [5] - Duplicate specified file")
-        print(" [6] - Remove duplicates")
+        printcol("I can do following: ", colors.GREEN)
+        printcol(" [1] - Print file list", colors.GREEN)
+        printcol(" [2] - Print system info", colors.GREEN)
+        printcol(" [3] - Print process list", colors.GREEN)
+        printcol(" [4] - Duplicate files in cur dir", colors.GREEN)
+        printcol(" [5] - Duplicate specified file", colors.GREEN)
+        printcol(" [6] - Remove duplicates", colors.GREEN)
 
-        do = int(raw_input("select, please: "))
+        do = int(raw_input(colors.GREEN + "select, please: " + colors.ENDC))
 
         if do == 1: # Print file list
             print(os.listdir("."))
 
         elif do == 2: # Print system info
-            print("SYSTEM INFO")
-            print("platform", sys.platform)
-            print("os name", os.name)
-            print("current dir", os.getcwd())
-            print("current user", os.getlogin())
-            print("file system coding", sys.getfilesystemencoding())
+            printcol("SYSTEM INFO", colors.BLUE)
+            printcol("platform: " + sys.platform, colors.BLUE)
+            printcol("os name: " +  os.name, colors.BLUE)
+            printcol("current dir: " + os.getcwd(), colors.BLUE)
+            printcol("current user: " + os.getlogin(), colors.BLUE)
+            printcol("file system coding: " + sys.getfilesystemencoding(), colors.BLUE)
             print("CPU count: ", psutil.cpu_count(logical=False))
 
         elif do == 3: # Print process list
@@ -56,7 +71,7 @@ while True:
 
         elif do == 5: # Duplicate specified file
             print("duplicating....")
-            f = raw_input("enter file name: ")
+            f = raw_input(colors.GREEN + "enter file name: " + colors.ENDC)
             smart_file_duplication(f)
 
         elif do == 6: # Remove duplicates
@@ -70,9 +85,9 @@ while True:
         else:
             print("unknown operation")
     elif is_continue == "n":
-        print("nooooo")
+        printcol("\nNoooooooooo\n", colors.HEADER)
         break
     else:
-        print("hwat??")
+        printcol("\nHwat??\n", colors.FAIL)
 
-    is_continue = raw_input("continue (y/n)? ")
+    is_continue = raw_input(colors.GREEN + "continue (y/n)? " + colors.ENDC)
