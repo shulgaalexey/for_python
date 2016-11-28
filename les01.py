@@ -31,6 +31,15 @@ def file_duplication(f):
         printcol("ignoring directory: " + f, colors.WARNING)
         return False
 
+def system_info():
+    printcol("SYSTEM INFO", colors.BLUE)
+    printcol("platform: " + sys.platform, colors.BLUE)
+    printcol("os name: " +  os.name, colors.BLUE)
+    printcol("current dir: " + os.getcwd(), colors.BLUE)
+    printcol("current user: " + os.getlogin(), colors.BLUE)
+    printcol("file system coding: " + sys.getfilesystemencoding(), colors.BLUE)
+    printcol("CPU count: " + str(psutil.cpu_count(logical=False)), colors.BLUE)
+
 
 printcol("\nHello\n", colors.HEADER)
 
@@ -52,13 +61,7 @@ while True:
             print(os.listdir("."))
 
         elif do == 2: # Print system info
-            printcol("SYSTEM INFO", colors.BLUE)
-            printcol("platform: " + sys.platform, colors.BLUE)
-            printcol("os name: " +  os.name, colors.BLUE)
-            printcol("current dir: " + os.getcwd(), colors.BLUE)
-            printcol("current user: " + os.getlogin(), colors.BLUE)
-            printcol("file system coding: " + sys.getfilesystemencoding(), colors.BLUE)
-            print("CPU count: ", psutil.cpu_count(logical=False))
+           system_info()
 
         elif do == 3: # Print process list
             print(psutil.pids())
