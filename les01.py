@@ -3,7 +3,21 @@ import psutil
 import shutil
 import sys
 
-print("hello")
+
+def smart_file_duplication(f):
+    if os.path.isfile(f):
+        shutil.copy(f, f + '.dupl')
+        if os.path.exists: # checking if duplication was successful
+            print("duplicated: " + f)
+            return True
+        else:
+            print("ERROR while duplicating file: " + f)
+            return False
+    else:
+        print("ignoring directory: " + f)
+        return False
+
+print("hello", bcolors.HEADER)
 
 is_continue = "y"
 while True:
@@ -38,18 +52,12 @@ while True:
             print("duplicating....")
             file_list = os.listdir(".")
             for f in file_list:
-                if os.path.isfile(f):
-                    print("copying...: ", f)
-                    shutil.copy(f, f + '.dupl')
+                smart_file_duplication(f)
 
         elif do == 5: # Duplicate specified file
             print("duplicating....")
-            file_to_dup = raw_input("enter file name: ")
-            file_list = os.listdir(".")
-            for f in file_list:
-                if f == file_to_dup and os.path.isfile(f):
-                    shutil.copy(f, f + '.dupl')
-                    break
+            f = raw_input("enter file name: ")
+            smart_file_duplication(f)
 
         elif do == 6: # Remove duplicates
             print("removing duplicates....")
