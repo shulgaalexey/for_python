@@ -4,6 +4,9 @@ import Tkinter
 import random
 import math
 
+PHI = 360. / 7
+R = 50.
+
 root = Tkinter.Tk()
 root.withdraw()
 
@@ -25,27 +28,21 @@ def draw_baraban(): # draw the bullet baraban
     fill_circle(0, 0, 80, .8, .8, .8)
     fill_circle(0, 160, 6, .2, .2, .2)
 
-    phi = 360. / 7
-    r = 50.
-
-
     # draw the empty bullet holes in baraban
     for i in range(0, 8):
-        phi_rad = phi * i * math.pi / 180.0
-        fill_circle(math.sin(phi_rad) * r, math.cos(phi_rad) * r + 60, 20, .5, .5, .5)
+        phi_rad = PHI * i * math.pi / 180.0
+        fill_circle(math.sin(phi_rad) * R, math.cos(phi_rad) * R + 60, 20, .5, .5, .5)
 
 
 def animate_baraban(start_pos): # animate the rotating baraban
-    phi = 360. / 7
-    r = 50.
 
     for i in range(0, random.randrange(7, 100)):
-        phi_rad = phi * (i + start_pos) * math.pi / 180.0
-        fill_circle(math.sin(phi_rad) * r, math.cos(phi_rad) * r + 60, 20, .9, .0, .0)
-        fill_circle(math.sin(phi_rad) * r, math.cos(phi_rad) * r + 60, 20, .5, .5, .5)
+        phi_rad = PHI * (i + start_pos) * math.pi / 180.0
+        fill_circle(math.sin(phi_rad) * R, math.cos(phi_rad) * R + 60, 20, .9, .0, .0)
+        fill_circle(math.sin(phi_rad) * R, math.cos(phi_rad) * R + 60, 20, .5, .5, .5)
 
     # draw the latest bullet
-    fill_circle(math.sin(phi_rad) * r, math.cos(phi_rad) * r + 60, 20, .9, .0, .0)
+    fill_circle(math.sin(phi_rad) * R, math.cos(phi_rad) * R + 60, 20, .9, .0, .0)
 
     # saving bullet pos for further rounds
     start_pos += i
