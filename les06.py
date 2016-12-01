@@ -34,7 +34,7 @@ def draw_baraban(): # draw the bullet baraban
         fill_circle(math.sin(phi_rad) * R, math.cos(phi_rad) * R + 60, 20, .5, .5, .5)
 
 
-def animate_baraban(start_pos): # animate the rotating baraban
+def rotate_baraban(start_pos): # animate the rotating baraban
 
     for i in range(0, random.randrange(7, 100)):
         phi_rad = PHI * (i + start_pos) * math.pi / 180.0
@@ -60,9 +60,9 @@ while answer != 'n':
     if answer == 'y':
 
         # animate the rotating baraban
-        last_bullet_pos = animate_baraban(last_bullet_pos)
+        last_bullet_pos = rotate_baraban(last_bullet_pos)
         # check if u ded, lik so ded
-        if last_bullet_pos % 7 == 0:
+        if last_bullet_pos == 0:
             turtle.penup()
             turtle.goto(-50, 200)
             turtle.pendown()
