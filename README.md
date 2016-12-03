@@ -1,3 +1,10 @@
 # for_python
 
-reviewing...
+Learning  Python (-:
+
+##Implemented
+
+ * Snake Game
+ * Russian Roulette Game
+ * Robo Assistant
+
